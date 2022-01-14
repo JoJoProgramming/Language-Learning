@@ -1,6 +1,10 @@
+import csv
+
 class Item:
+
     payRate = 0.8 #item cost after 20% discount
     allItems = []
+
     def __init__(self, name: str = "", price: float = 0, quantity: int = 0):
         #validations for received arguments
         assert price >= 0, f"Price {price} is not greater than 0!"
@@ -11,11 +15,13 @@ class Item:
         self.quantity = quantity
         #actions to execute
         Item.allItems.append(self)  
+
     def determine_price(self):
         if self.name == "Phone":
             self.price = 100
         elif self.name == "Laptop":
             self.price = 1000
+
     def determine_discount(self):
         if self.name == "Phone":
             self.payRate = .8
@@ -23,15 +29,22 @@ class Item:
             self.payRate = .7
         else:
             print("This option is invalid.")
+
     def calculate_total_price(self):
         self.price = self.price * self.quantity
+
     def apply_discount(self):
         self.price = self.price * self.payRate
+    
+    @classmethod
+    def initiate_from_csv(cls):
+        with open('OOP Course CSV.csv', 'r') as f: #currently not working, indicates file name is incorrect for CSV
+            reader = csv.DictReader(f)
+            items = list(reader)
+        for item in items:
+            print(item)
+
     def __repr__(self):
         return f"Item('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}')"
-itemPhone = Item("Phone", 100, 1)
-itemLaptop = Item("Laptop", 1000, 3)
-itemCable = Item("Cable", 10, 5)
-itemMouse = Item("Mouse", 50, 5)
-itemKeyboard = Item("Keyboard", 75, 5)
-print(Item.allItems)
+
+Item.initiate_from_csv()
