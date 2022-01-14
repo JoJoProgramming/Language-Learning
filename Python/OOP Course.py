@@ -11,6 +11,15 @@ class Item:
     def determine_price(self):
         if self.name == "Phone":
             self.price = 100
+        elif self.name == "Laptop":
+            self.price = 1000
+    def determine_discount(self):
+        if self.name == "Phone":
+            self.pay_rate = .8
+        elif self.name == "Laptop":
+            self.pay_rate = .7
+        else:
+            print("This option is invalid.")
     def calculate_total_price(self):
         self.price = self.price * self.quantity
     def apply_discount(self):
@@ -22,6 +31,7 @@ item1.name = input("What do you want to buy? ")
 item1.determine_price()
 item1.quantity = int(input("How many phones do you want to buy? "))
 item1.calculate_total_price()
+item1.determine_discount()
 item1.apply_discount()
-print(item1.price)
+print(f"The price of your purchase is ${item1.price} for {item1.quantity} {item1.name}s.")
 
