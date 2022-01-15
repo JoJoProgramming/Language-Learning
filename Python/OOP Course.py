@@ -59,4 +59,10 @@ class Item:
     def __repr__(self):
         return f"Item('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}')"
 
-print(Item.is_integer(7.5))
+class Phone(Item):
+    pass
+
+phone1 = Phone("jscPhonev10", 500, 5)
+phone1.broken_phones = 1
+phone2 = Phone("jscPhonev20", 700, 5)
+phone2.broken_phones = 1
