@@ -38,13 +38,18 @@ class Item:
     
     @classmethod
     def initiate_from_csv(cls):
-        with open('OOP Course CSV.csv', 'r') as f: #currently not working, indicates file name is incorrect for CSV
+        with open('C:\Programs\Learning\Python\OOP Course CSV.csv', 'r') as f:
             reader = csv.DictReader(f)
             items = list(reader)
         for item in items:
-            print(item)
+            Item(
+                name = item.get('name'),
+                price = float(item.get('price')),
+                quantity = int(item.get('quantity')),
+            )
 
     def __repr__(self):
         return f"Item('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}')"
 
 Item.initiate_from_csv()
+print(Item.allItems)
