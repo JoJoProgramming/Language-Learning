@@ -48,8 +48,15 @@ class Item:
                 quantity = int(item.get('quantity')),
             )
 
+    @staticmethod
+    def is_integer(x):
+        try:
+            float(x)
+            return True
+        except:
+            return False
+
     def __repr__(self):
         return f"Item('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}')"
 
-Item.initiate_from_csv()
-print(Item.allItems)
+print(Item.is_integer(7.5))
