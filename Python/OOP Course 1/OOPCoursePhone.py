@@ -7,4 +7,4 @@ class Phone(Item):
         #actions to execute
         Phone.allItems.append(self)
     def __repr__(self):
-        return f"{self.__class__.__name__}('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}, Broken: {self.broken_phones}')"
+        return f"{self.__class__.__name__}('Name: {self.name}, Price: {self.__price}, Quantity: {self.quantity}, Broken: {self.broken_phones}')"

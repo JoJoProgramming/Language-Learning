@@ -10,23 +10,36 @@ class Item:
         assert price >= 0, f"Price {price} is not greater than 0!"
         assert quantity >= 0, f"Quantity {quantity} is not greater than 0!"
         #assign to self instance
-        self._name = name
-        self.price = price
+        self.__name = name
+        self.__price = price
         self.quantity = quantity
         #actions to execute
         Item.allItems.append(self)  
 
     @property
+    def price(self):
+        return self.__price
+
+    def apply_discount(self):
+        self.__price = self.__price * self.payRate
+
+    @property
     def name(self):
-        return self._name
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        while len(value) > 10:
+            value = input("This name is too long, please try again: ")
+        else:
+            self.__name = value
 
 
-
-    def determine_price(self):
+    def __determine_price(self):
         if self.name == "Phone":
-            self.price = 100
+            self.__price = 100
         elif self.name == "Laptop":
-            self.price = 1000
+            self.__price = 1000
 
     def determine_discount(self):
         if self.name == "Phone":
@@ -36,11 +49,8 @@ class Item:
         else:
             print("This option is invalid.")
 
-    def calculate_total_price(self):
-        self.price = self.price * self.quantity
 
-    def apply_discount(self):
-        self.price = self.price * self.payRate
+
     
     @classmethod
     def initiate_from_csv(cls):
@@ -50,6 +60,7 @@ class Item:
         for item in items:
             Item(
                 name = item.get('name'),
+    
                 price = float(item.get('price')),
                 quantity = int(item.get('quantity')),
             )
@@ -63,6 +74,6 @@ class Item:
             return False
 
     def __repr__(self):
-        return f"{self.__class__.__name__}('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}')"
+        return f"{self.__class__.__name__}('Name: {self.name}, Price: {self.__price}, Quantity: {self.quantity}')"
     
 
