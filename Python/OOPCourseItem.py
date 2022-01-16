@@ -10,11 +10,17 @@ class Item:
         assert price >= 0, f"Price {price} is not greater than 0!"
         assert quantity >= 0, f"Quantity {quantity} is not greater than 0!"
         #assign to self instance
-        self.name = name
+        self._name = name
         self.price = price
         self.quantity = quantity
         #actions to execute
         Item.allItems.append(self)  
+
+    @property
+    def name(self):
+        return self._name
+
+
 
     def determine_price(self):
         if self.name == "Phone":
@@ -58,3 +64,5 @@ class Item:
 
     def __repr__(self):
         return f"{self.__class__.__name__}('Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}')"
+    
+
