@@ -29,6 +29,9 @@ class mainapp(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
+def qf(param):
+    print(param)
+
 #adds page to window
 class StartPage(tk.Frame):
     #init here requires 3 arguments as the parent init uses 3 arguments
@@ -39,6 +42,9 @@ class StartPage(tk.Frame):
         #STANDARD_FONT is a global variable
         label = tk.Label(self, text = "Start Page", font = STANDARD_FONT)
         label.pack(pady = 10, padx = 10)
+        button1 = tk.Button(self, text = "Visit Page 1",
+         command = lambda: qf("param"))
+        button1.pack()
 
 app = mainapp()
 app.mainloop()
