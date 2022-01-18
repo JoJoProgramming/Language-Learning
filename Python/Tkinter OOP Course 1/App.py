@@ -14,23 +14,23 @@ class mainapp(tk.Tk):
         container.grid_rowconfigure(0, weight = 1)
         container.grid_columnconfigure(0, weight = 1)
         self.frames = {}
+        #list of pages; currently add pages manually. must be way to create list variable to pass
+        #pages into and use that list variable here.
+        for F in (StartPage, PageOne, PageTwo):
         #frame is the keyword argument
-        frame = StartPage(container, self)
-        self.frames[StartPage] = frame
+            frame = F(container, self)
+            self.frames[F] = frame
         #sticky below indicates the alignment plus stretch of the parameter;
         #nsew stands for North, South, East, West
         #if a widget is given EW as the sticky, it will align to the middle of the
         #program and stretch left and right, for example.
-        frame.grid(row=0, column=0, sticky = "nsew")
+            frame.grid(row=0, column=0, sticky = "nsew")
         self.show_frame(StartPage)
     
     def show_frame(self, cont):
         #cont indicates that the self.frames is within the init method
         frame = self.frames[cont]
         frame.tkraise()
-
-def qf(param):
-    print(param)
 
 #adds page to window
 class StartPage(tk.Frame):
@@ -43,8 +43,32 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text = "Start Page", font = STANDARD_FONT)
         label.pack(pady = 10, padx = 10)
         button1 = tk.Button(self, text = "Visit Page 1",
-         command = lambda: qf("param"))
+         command = lambda: controller.show_frame(PageOne))
         button1.pack()
+
+class PageOne(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "Page One", font = STANDARD_FONT)
+        label.pack(pady = 10, padx = 10)
+        button1 = tk.Button(self, text = "Back to Home",
+         command = lambda: controller.show_frame(StartPage))
+        button2 = tk.Button(self, text = "Visit Page 2",
+         command = lambda: controller.show_frame(PageTwo))
+        button1.pack()
+        button2.pack()
+
+class PageTwo(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "Page Two", font = STANDARD_FONT)
+        label.pack(pady = 10, padx = 10)
+        button1 = tk.Button(self, text = "Back to Home",
+         command = lambda: controller.show_frame(StartPage))
+        button2 = tk.Button(self, text = "Back to Page One",
+         command = lambda: controller.show_frame(PageOne))
+        button1.pack()
+        button2.pack()
 
 app = mainapp()
 app.mainloop()
