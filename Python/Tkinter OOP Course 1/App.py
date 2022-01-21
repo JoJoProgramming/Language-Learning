@@ -1,4 +1,6 @@
-import tkinter as tk
+import tkinter as tk 
+#ttk is a stylizer for tkinter
+from tkinter import ttk
 
 STANDARD_FONT = ("FS Elliot Pro", 12)
 
@@ -42,18 +44,21 @@ class StartPage(tk.Frame):
         #STANDARD_FONT is a global variable
         label = tk.Label(self, text = "Start Page", font = STANDARD_FONT)
         label.pack(pady = 10, padx = 10)
-        button1 = tk.Button(self, text = "Visit Page 1",
+        button1 = ttk.Button(self, text = "Visit Page 1",
          command = lambda: controller.show_frame(PageOne))
         button1.pack()
+        button2 = ttk.Button(self, text = "Visit Page 2",
+         command = lambda: controller.show_frame(PageTwo))
+        button2.pack()
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Page One", font = STANDARD_FONT)
         label.pack(pady = 10, padx = 10)
-        button1 = tk.Button(self, text = "Back to Home",
+        button1 = ttk.Button(self, text = "Back to Home",
          command = lambda: controller.show_frame(StartPage))
-        button2 = tk.Button(self, text = "Visit Page 2",
+        button2 = ttk.Button(self, text = "Visit Page 2",
          command = lambda: controller.show_frame(PageTwo))
         button1.pack()
         button2.pack()
@@ -63,9 +68,9 @@ class PageTwo(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Page Two", font = STANDARD_FONT)
         label.pack(pady = 10, padx = 10)
-        button1 = tk.Button(self, text = "Back to Home",
+        button1 = ttk.Button(self, text = "Back to Home",
          command = lambda: controller.show_frame(StartPage))
-        button2 = tk.Button(self, text = "Back to Page One",
+        button2 = ttk.Button(self, text = "Back to Page 1",
          command = lambda: controller.show_frame(PageOne))
         button1.pack()
         button2.pack()
